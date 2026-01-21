@@ -8,8 +8,6 @@ import { UserEmptyCard } from "@/components/user-empty-card";
 export function UserGrid() {
   const usersResult = useAtomValue(usersAtom);
 
-  console.log("Users result: ", usersResult);
-
   return Result.builder(usersResult)
     .onInitial(() => <UserGridSkeleton />)
     .onFailure((cause) => <UserFailureCard cause={cause} />)

@@ -1,17 +1,11 @@
-import { Effect, Data } from "effect";
+import { Effect, Data, Cause } from "effect";
 import {
   HttpClient,
   HttpClientResponse,
   FetchHttpClient,
 } from "@effect/platform";
-import {
-  UsersResponseSchema,
-  DeleteUserResponseSchema,
-} from "@/app/schema/user-schema";
-import type {
-  UsersResponse,
-  DeleteUserResponse,
-} from "@/app/schema/user-schema";
+import { UsersResponseSchema } from "@/app/schema/user-schema";
+import type { UsersResponse } from "@/app/schema/user-schema";
 
 // ============ GetUsers Errors ============
 
@@ -78,10 +72,13 @@ export class UsersService extends Effect.Service<UsersService>()(
       const client = (yield* HttpClient.HttpClient).pipe(
         HttpClient.filterStatusOk,
       );
-      function getUsers(): Effect.Effect<UsersResponse, UserServiceError> {
+      function getUsers(): Effect.Effect<UsersResponse, GetUsersError> {
         return client.get("http://localhost:3001/users").pipe(
           Effect.flatMap(
             HttpClientResponse.schemaBodyJson(UsersResponseSchema),
+          ),
+          Effect.tapErrorCause((cause) =>
+            Effect.logError("getUsers failed:\n" + Cause.pretty(cause)),
           ),
           Effect.catchTags({
             RequestError: (requestError) =>
@@ -99,24 +96,23 @@ export class UsersService extends Effect.Service<UsersService>()(
                   cause: responseError,
                 }),
               ),
-            ParseError: (parseError) =>
-              Effect.fail(
+            ParseError: (parseError) => {
+              return Effect.fail(
                 new GetUsersParseError({
                   message: "Failed to parse getUsers response",
                   cause: parseError,
                 }),
-              ),
+              );
+            },
           }),
         );
       }
 
       function deleteUser(
-        userId: number,
-      ): Effect.Effect<DeleteUserResponse, DeleteUserError> {
-        return client.del(`http://localhost:3000/users/${userId}`).pipe(
-          Effect.flatMap(
-            HttpClientResponse.schemaBodyJson(DeleteUserResponseSchema),
-          ),
+        userId: string,
+      ): Effect.Effect<void, DeleteUserError> {
+        return client.del(`http://localhost:3001/users/${userId}`).pipe(
+          Effect.asVoid,
           Effect.catchTags({
             RequestError: (requestError) =>
               Effect.fail(
@@ -130,13 +126,6 @@ export class UsersService extends Effect.Service<UsersService>()(
                 new DeleteUserResponseError({
                   message: `Failed to delete user ${userId}: status ${responseError.response.status}`,
                   cause: responseError,
-                }),
-              ),
-            ParseError: (parseError) =>
-              Effect.fail(
-                new DeleteUserParseError({
-                  message: `Failed to parse delete response for user ${userId}`,
-                  cause: parseError,
                 }),
               ),
           }),

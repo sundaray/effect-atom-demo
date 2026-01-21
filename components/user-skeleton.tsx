@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function UserSkeleton() {
   return (
-    <div className="bg-whiteoverflow-hidden">
+    <div className="bg-white overflow-hidden">
       <Skeleton className="aspect-square w-full bg-neutral-200" />
 
       <div className="p-4 space-y-3">

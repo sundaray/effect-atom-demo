@@ -11,17 +11,8 @@ export const UserSchema = Schema.Struct({
   }),
 });
 
-export const UsersResponseSchema = Schema.Struct({
-  users: Schema.Array(UserSchema),
-});
-
-export const DeleteUserResponseSchema = Schema.Struct({
-  ...UserSchema.fields,
-  isDeleted: Schema.Boolean,
-  deletedOn: Schema.String,
-});
+export const UsersResponseSchema = Schema.Array(UserSchema);
 
 // Derive TypeScript types from schemas
 export type User = typeof UserSchema.Type;
 export type UsersResponse = typeof UsersResponseSchema.Type;
-export type DeleteUserResponse = typeof DeleteUserResponseSchema.Type;

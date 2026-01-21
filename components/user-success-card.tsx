@@ -9,7 +9,7 @@ interface UserSuccessCardProps {
 
 export function UserSuccessCard({ user }: UserSuccessCardProps) {
   return (
-    <div className="bg-white overflow-hidden">
+    <div className="bg-white overflow-hidden border p-4">
       <h3 className="font-semibold text-lg">
         {user.firstName} {user.lastName}
       </h3>

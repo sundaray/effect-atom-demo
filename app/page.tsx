@@ -16,7 +16,7 @@ export default function Page() {
           </h1>
         </header>
 
-        <main className="p-6 max-w-4xl mx-auto">
+        <main className="p-6 max-w-5xl mx-auto">
           <UserGrid />
         </main>
       </div>

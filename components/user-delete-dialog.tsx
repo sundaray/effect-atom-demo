@@ -44,7 +44,6 @@ export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
     setIsDeleting(false);
 
     if (Exit.isSuccess(exit)) {
-      console.log(exit.value.isDeleted);
       setOpen(false);
     } else {
       const failureOption = Cause.failureOption(exit.cause);
