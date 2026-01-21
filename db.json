@@ -1,16 +1,6 @@
 {
   "users": [
     {
-      "id": "2",
-      "firstName": "Michael",
-      "lastName": "Williams",
-      "email": "michael.williams@example.com",
-      "company": {
-        "name": "Spinka - Dickinson",
-        "title": "Support Specialist"
-      }
-    },
-    {
       "id": "3",
       "firstName": "Sophia",
       "lastName": "Brown",
@@ -68,26 +58,6 @@
       "company": {
         "name": "Nikolaus Inc",
         "title": "Chief Executive Officer"
-      }
-    },
-    {
-      "id": "9",
-      "firstName": "Ethan",
-      "lastName": "Martinez",
-      "email": "ethan.martinez@example.com",
-      "company": {
-        "name": "Gorczany - Gottlieb",
-        "title": "Legal Counsel"
-      }
-    },
-    {
-      "id": "10",
-      "firstName": "Isabella",
-      "lastName": "Anderson",
-      "email": "isabella.anderson@example.com",
-      "company": {
-        "name": "Pollich - Hilpert",
-        "title": "Chief Financial Officer"
       }
     },
     {

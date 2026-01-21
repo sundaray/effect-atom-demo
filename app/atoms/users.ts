@@ -1,8 +1,9 @@
 import { Effect } from "effect";
+import { Reactivity } from "@effect/experimental";
 import { Atom } from "@effect-atom/atom-react";
 import { UsersService } from "@/app/services/users-service";
 
-// Create an AtomRuntime from the UsersService layer
+Atom.runtime.addGlobalLayer(Reactivity.layer);
 
 const usersRuntime = Atom.runtime(UsersService.Default);
 
