@@ -93,17 +93,14 @@ export class UsersService extends Effect.Service<UsersService>()(
       function addUser(
         user: AddUserFormValues,
       ): Effect.Effect<User, AddUserError> {
-        // 1. Start building the POST request
         return HttpClientRequest.post("http://localhost:3001/users").pipe(
-          // 2. Attach the JSON body (handles serialization & Content-Type header)
           HttpClientRequest.bodyJson(user),
-          // 3. Execute using your filtered client
           Effect.flatMap(client.execute),
-          // 4. Validate response
           Effect.flatMap(HttpClientResponse.schemaBodyJson(UserSchema)),
           Effect.catchTags({
             HttpBodyError: (err) =>
               Effect.fail(
+                // Change the error name
                 new AddUserRequestError({
                   message: "Failed to serialize addUser request body",
                   cause: err,

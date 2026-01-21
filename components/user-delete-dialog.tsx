@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Exit, Cause, Option } from "effect";
 import { Button } from "@/components/ui/button";
@@ -15,6 +18,7 @@ import {
 import { useAtomSet } from "@effect-atom/atom-react";
 import { deleteUserAtom } from "@/app/atoms/users";
 import type { User } from "@/app/schema/user-schema";
+import { useSpinDelay } from "@/hooks/use-spin-delay";
 
 interface UserDeleteDialogProps {
   user: User;
@@ -22,10 +26,17 @@ interface UserDeleteDialogProps {
 }
 
 export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
+  const router = useRouter();
+
   const [open, setOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const deleteUser = useAtomSet(deleteUserAtom, { mode: "promiseExit" });
+
+  const showSpinner = useSpinDelay(isDeleting, {
+    delay: 0,
+    minDuration: 500,
+  });
 
   function handleOpenChange(isOpen: boolean) {
     setOpen(isOpen);
@@ -44,6 +55,7 @@ export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
     setIsDeleting(false);
 
     if (Exit.isSuccess(exit)) {
+      router.refresh();
       setOpen(false);
     } else {
       const failureOption = Cause.failureOption(exit.cause);
@@ -85,7 +97,7 @@ export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
             onClick={handleDelete}
             disabled={isDeleting}
           >
-            {isDeleting && <Loader2 className="animate-spin" />}
+            {showSpinner && <Loader2 className="size-4 animate-spin" />}
             Delete
           </Button>
         </DialogFooter>

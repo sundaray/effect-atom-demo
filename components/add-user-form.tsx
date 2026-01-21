@@ -6,6 +6,7 @@ import { effectTsResolver } from "@hookform/resolvers/effect-ts";
 import { useAtomSet } from "@effect-atom/atom-react";
 import { Exit, Cause, Option } from "effect";
 import { Loader2 } from "lucide-react";
+import { useSpinDelay } from "@/hooks/use-spin-delay";
 
 import {
   AddUserFormSchema,
@@ -48,6 +49,11 @@ export function AddUserForm() {
       email: "",
       company: { name: "", title: "" },
     },
+  });
+
+  const showSpinner = useSpinDelay(isSubmitting, {
+    delay: 0,
+    minDuration: 500,
   });
 
   const onSubmit = async (data: AddUserFormValues) => {
@@ -168,7 +174,7 @@ export function AddUserForm() {
 
           <div className="pt-4 flex justify-end">
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {showSpinner && <Loader2 className="size-4 animate-spin" />}
               Create User
             </Button>
           </div>
