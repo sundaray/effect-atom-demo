@@ -33,8 +33,13 @@ export class UsersService extends Effect.Service<UsersService>()(
       const client = (yield* HttpClient.HttpClient).pipe(
         HttpClient.filterStatusOk,
       );
-      function getUsers(): Effect.Effect<UsersResponse, GetUsersError> {
-        return client.get("http://localhost:3001/users").pipe(
+      function getUsers(
+        query: string,
+      ): Effect.Effect<UsersResponse, GetUsersError> {
+        const request = HttpClientRequest.get(
+          "http://localhost:3001/users",
+        ).pipe(HttpClientRequest.setUrlParams({ q: query ?? "" }));
+        return client.execute(request).pipe(
           Effect.flatMap(
             HttpClientResponse.schemaBodyJson(UsersResponseSchema),
           ),

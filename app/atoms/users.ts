@@ -2,13 +2,15 @@ import { Effect } from "effect";
 import { Atom } from "@effect-atom/atom-react";
 import { UsersService } from "@/app/services/users-service";
 import { atomRuntime } from "@/runtime";
-import { UserSearch } from "lucide-react";
 import { AddUserFormValues } from "../schema/user-schema";
+import { debouncedSearchQueryAtom } from "@/app/atoms/search";
 
 export const usersAtom = atomRuntime
-  .atom(
+  .atom((get) =>
     Effect.gen(function* () {
-      return yield* UsersService.getUsers();
+      const query = get(debouncedSearchQueryAtom);
+
+      return yield* UsersService.getUsers(query);
     }),
   )
   .pipe(Atom.keepAlive, Atom.withReactivity(["users"])); // Subcribe to users key

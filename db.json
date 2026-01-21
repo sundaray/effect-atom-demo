@@ -1,16 +1,6 @@
 {
   "users": [
     {
-      "id": "6",
-      "firstName": "Olivia",
-      "lastName": "Wilson",
-      "email": "olivia.wilson@example.com",
-      "company": {
-        "name": "Pfannerstill Inc",
-        "title": "Research Analyst"
-      }
-    },
-    {
       "id": "7",
       "firstName": "Alexander",
       "lastName": "Jones",
