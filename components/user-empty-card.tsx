@@ -15,8 +15,10 @@ export function UserEmptyCard() {
           <EmptyMedia variant="icon">
             <UsersIcon className="text-neutral-400 size-10" />
           </EmptyMedia>
-          <EmptyTitle>No users found</EmptyTitle>
-          <EmptyDescription>The user list is currently empty.</EmptyDescription>
+          <EmptyTitle className="font-bold text-lg">No users found</EmptyTitle>
+          <EmptyDescription className="text-sm">
+            The user list is currently empty.
+          </EmptyDescription>
         </EmptyHeader>
       </Empty>
     </div>

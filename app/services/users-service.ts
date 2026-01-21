@@ -3,6 +3,7 @@ import {
   HttpClient,
   HttpClientResponse,
   FetchHttpClient,
+  HttpClientRequest,
 } from "@effect/platform";
 import { UsersResponseSchema } from "@/app/schema/user-schema";
 import type { UsersResponse } from "@/app/schema/user-schema";
@@ -76,9 +77,6 @@ export class UsersService extends Effect.Service<UsersService>()(
         return client.get("http://localhost:3001/users").pipe(
           Effect.flatMap(
             HttpClientResponse.schemaBodyJson(UsersResponseSchema),
-          ),
-          Effect.tapErrorCause((cause) =>
-            Effect.logError("getUsers failed:\n" + Cause.pretty(cause)),
           ),
           Effect.catchTags({
             RequestError: (requestError) =>

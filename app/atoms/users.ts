@@ -1,13 +1,9 @@
 import { Effect } from "effect";
-import { Reactivity } from "@effect/experimental";
 import { Atom } from "@effect-atom/atom-react";
 import { UsersService } from "@/app/services/users-service";
+import { atomRuntime } from "@/runtime";
 
-Atom.runtime.addGlobalLayer(Reactivity.layer);
-
-const usersRuntime = Atom.runtime(UsersService.Default);
-
-export const usersAtom = usersRuntime
+export const usersAtom = atomRuntime
   .atom(
     Effect.gen(function* () {
       return yield* UsersService.getUsers();
@@ -15,7 +11,7 @@ export const usersAtom = usersRuntime
   )
   .pipe(Atom.keepAlive, Atom.withReactivity(["users"])); // Subcribe to users key
 
-export const deleteUserAtom = usersRuntime.fn(
+export const deleteUserAtom = atomRuntime.fn(
   Effect.fnUntraced(function* (userId: string) {
     return yield* UsersService.deleteUser(userId);
   }),
