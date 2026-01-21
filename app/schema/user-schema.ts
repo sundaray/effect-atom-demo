@@ -11,8 +11,27 @@ export const UserSchema = Schema.Struct({
   }),
 });
 
+const requiredString = (message: string) =>
+  Schema.NonEmptyString.annotations({ message: () => message });
+
+export const AddUserFormSchema = Schema.Struct({
+  firstName: requiredString("First name is required"),
+  lastName: requiredString("Last name is required"),
+
+  email: Schema.String.pipe(
+    Schema.nonEmptyString({ message: () => "Email is required" }),
+    Schema.includes("@", { message: () => "Invalid email address" }),
+  ),
+
+  company: Schema.Struct({
+    name: requiredString("Company name is required"),
+    title: requiredString("Job title is required"),
+  }),
+});
+
 export const UsersResponseSchema = Schema.Array(UserSchema);
 
 // Derive TypeScript types from schemas
 export type User = typeof UserSchema.Type;
 export type UsersResponse = typeof UsersResponseSchema.Type;
+export type AddUserFormValues = typeof AddUserFormSchema.Type;
