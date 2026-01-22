@@ -26,7 +26,7 @@ const usersResponseAtom = atomRuntime
       return result;
     }),
   )
-  .pipe(Atom.keepAlive, atomRuntime.factory.withReactivity(["users"]));
+  .pipe(Atom.keepAlive, Atom.withReactivity(["users"]));
 
 // ============ Get Users ============
 export const usersAtom = Atom.mapResult(
@@ -45,12 +45,13 @@ export const deleteUserAtom = atomRuntime.fn(
   Effect.fnUntraced(function* (userId: string) {
     console.log(`[DELETE USER] Starting delete for user: ${userId}`);
 
-    yield* Reactivity.mutation(UsersService.deleteUser(userId), ["users"]);
+    (yield* UsersService.deleteUser(userId),);
 
     console.log(
       `[DELETE USER] Delete completed, invalidation should have fired`,
     );
   }),
+  { reactivityKeys: ["users"] }
 );
 
 // ============ Add User ============

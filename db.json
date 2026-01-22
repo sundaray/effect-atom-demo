@@ -1,26 +1,6 @@
 {
   "users": [
     {
-      "id": "9",
-      "firstName": "Ethan",
-      "lastName": "Martinez",
-      "email": "ethan.martinez@example.com",
-      "company": {
-        "name": "Gorczany - Gottlieb",
-        "title": "Legal Counsel"
-      }
-    },
-    {
-      "id": "10",
-      "firstName": "Isabella",
-      "lastName": "Anderson",
-      "email": "isabella.anderson@example.com",
-      "company": {
-        "name": "Pollich - Hilpert",
-        "title": "Chief Financial Officer"
-      }
-    },
-    {
       "id": "11",
       "firstName": "Liam",
       "lastName": "Garcia",
