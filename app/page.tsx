@@ -4,6 +4,7 @@ import { UserGrid } from "@/components/user-grid";
 import { Sidebar, SidebarToggle } from "@/components/sidebar";
 import { UsersSearchBar } from "@/components/users-search-bar";
 import { UsersPagination } from "@/components/users-pagination";
+import { DebugReactivity } from "@/components/debug-reactivity";
 
 export default function Page() {
   return (

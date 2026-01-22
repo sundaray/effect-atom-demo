@@ -5,6 +5,9 @@ import { atomRuntime } from "@/runtime";
 import { AddUserFormValues } from "../schema/user-schema";
 import { debouncedSearchQueryAtom } from "@/app/atoms/search";
 import { pageAtom } from "@/app/atoms/page";
+import { Reactivity } from "@effect/experimental";
+
+let usersFetchCount = 0;
 
 const usersResponseAtom = atomRuntime
   .atom((get) =>
@@ -12,10 +15,18 @@ const usersResponseAtom = atomRuntime
       const query = get(debouncedSearchQueryAtom);
       const page = get(pageAtom);
 
-      return yield* UsersService.getUsers(query, page);
+      console.log(
+        `[USERS ATOM] Fetching users... (count: ${usersFetchCount}, query: "${query}", page: ${page})`,
+      );
+
+      const result = yield* UsersService.getUsers(query, page);
+
+      console.log(`[USERS ATOM] Fetched ${result.users.length} users`);
+
+      return result;
     }),
   )
-  .pipe(Atom.keepAlive, Atom.withReactivity(["users"]));
+  .pipe(Atom.keepAlive, atomRuntime.factory.withReactivity(["users"]));
 
 // ============ Get Users ============
 export const usersAtom = Atom.mapResult(
@@ -32,9 +43,14 @@ export const usersCountAtom = Atom.mapResult(
 // ============ Delete User ============
 export const deleteUserAtom = atomRuntime.fn(
   Effect.fnUntraced(function* (userId: string) {
-    return yield* UsersService.deleteUser(userId);
+    console.log(`[DELETE USER] Starting delete for user: ${userId}`);
+
+    yield* Reactivity.mutation(UsersService.deleteUser(userId), ["users"]);
+
+    console.log(
+      `[DELETE USER] Delete completed, invalidation should have fired`,
+    );
   }),
-  { reactivityKeys: ["users"] }, // Invalidate "users" when done
 );
 
 // ============ Add User ============
