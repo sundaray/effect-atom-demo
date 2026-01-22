@@ -7,7 +7,7 @@ import {
 } from "@effect/platform";
 import {
   UserSchema,
-  UsersResponseSchema,
+  UsersSchema,
   AddUserFormValues,
   type User,
   type UsersResponse,
@@ -35,13 +35,26 @@ export class UsersService extends Effect.Service<UsersService>()(
       );
       function getUsers(
         query: string,
+        page: number,
       ): Effect.Effect<UsersResponse, GetUsersError> {
         const request = HttpClientRequest.get(
           "http://localhost:3001/users",
-        ).pipe(HttpClientRequest.setUrlParams({ q: query ?? "" }));
+        ).pipe(
+          HttpClientRequest.setUrlParams({
+            q: query ?? "",
+            _page: page.toString(),
+            _limit: "8",
+          }),
+        );
+
         return client.execute(request).pipe(
-          Effect.flatMap(
-            HttpClientResponse.schemaBodyJson(UsersResponseSchema),
+          Effect.flatMap((response) =>
+            Effect.all({
+              users: HttpClientResponse.schemaBodyJson(UsersSchema)(response),
+              usersCount: Effect.succeed(
+                Number(response.headers["x-total-count"]),
+              ),
+            }),
           ),
           Effect.catchTags({
             RequestError: (requestError) =>

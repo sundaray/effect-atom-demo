@@ -3,7 +3,7 @@ import { useAtomSuspense } from "@effect-atom/atom-react";
 import { usersAtom } from "@/app/atoms/users";
 import { UserSuccessCard } from "@/components/user-success-card";
 import { UserEmptyCard } from "@/components/user-empty-card";
-import { UserGridSkeleton } from "@/components/user-skeleton";
+import { UserGridSpinner } from "@/components/user-grid-spinner";
 
 function UsergridContent() {
   const result = useAtomSuspense(usersAtom);
@@ -27,7 +27,7 @@ function UsergridContent() {
 
 export function UserGridSuspense() {
   return (
-    <Suspense fallback={<UserGridSkeleton />}>
+    <Suspense fallback={<UserGridSpinner />}>
       <UsergridContent />
     </Suspense>
   );

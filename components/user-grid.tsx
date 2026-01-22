@@ -1,6 +1,6 @@
 import { useAtomValue, Result } from "@effect-atom/atom-react";
 import { usersAtom } from "@/app/atoms/users";
-import { UserGridSkeleton } from "@/components/user-skeleton";
+import { UserGridSpinner } from "@/components/user-grid-spinner";
 import { UserSuccessCard } from "@/components/user-success-card";
 import { UserFailureCard } from "@/components/user-failure-card";
 import { UserEmptyCard } from "@/components/user-empty-card";
@@ -9,7 +9,7 @@ export function UserGrid() {
   const usersResult = useAtomValue(usersAtom);
 
   return Result.builder(usersResult)
-    .onInitial(() => <UserGridSkeleton />)
+    .onInitial(() => <UserGridSpinner />)
     .onFailure((cause) => <UserFailureCard cause={cause} />)
     .onSuccess((users, { waiting }) => (
       <div className={waiting ? "opacity-50 transition-opacity" : ""}>

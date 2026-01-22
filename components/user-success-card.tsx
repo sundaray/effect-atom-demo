@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { User } from "@/app/schema/user-schema";
@@ -9,22 +10,40 @@ interface UserSuccessCardProps {
 
 export function UserSuccessCard({ user }: UserSuccessCardProps) {
   return (
-    <div className="bg-white overflow-hidden border p-4">
-      <h3 className="font-semibold text-lg">
-        {user.firstName} {user.lastName}
-      </h3>
-      <p className="text-sm text-neutral-600">{user.company.title}</p>
-      <p className="text-sm text-neutral-600">{user.company.name}</p>
-      <p className="text-xs text-neutral-600 mt-2 break-all">{user.email}</p>
+    <div className="bg-white border p-4 flex flex-col justify-between gap-4 relative">
+      <div className="space-y-1">
+        <h3 className="font-semibold text-lg leading-none">
+          {user.firstName} {user.lastName}
+        </h3>
+        <p className="text-sm text-neutral-600 font-medium">
+          {user.company.title}
+        </p>
+        <p className="text-sm text-neutral-500">{user.company.name}</p>
+      </div>
+
       <UserDeleteDialog
         user={user}
         trigger={
-          <Button variant="destructive" size="sm" className="mt-4">
-            <Trash2 />
-            Delete
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-8 text-neutral-400 hover:text-red-600 hover:bg-red-50 absolute top-1 right-1"
+          >
+            <Trash2 className="size-4" />
+            <span className="sr-only">Delete user</span>
           </Button>
         }
       />
+
+      {/* Middle Section: Secondary Info */}
+      <p className="text-xs text-neutral-400 break-all">{user.email}</p>
+
+      <Link
+        href={`/users/${user.id}`}
+        className="w-full bg-blue-50 text-blue-900 font-medium hover:bg-blue-50 text-sm text-center py-1"
+      >
+        View Details
+      </Link>
     </div>
   );
 }

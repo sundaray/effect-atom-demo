@@ -29,7 +29,12 @@ export const AddUserFormSchema = Schema.Struct({
   }),
 });
 
-export const UsersResponseSchema = Schema.Array(UserSchema);
+export const UsersSchema = Schema.Array(UserSchema);
+
+export const UsersResponseSchema = Schema.Struct({
+  users: UsersSchema,
+  usersCount: Schema.Number,
+});
 
 // Derive TypeScript types from schemas
 export type User = typeof UserSchema.Type;
