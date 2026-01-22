@@ -7,14 +7,17 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import type { GetUsersError } from "@/app/errors";
+import type { GetUserError, GetUsersError } from "@/app/errors";
 
 interface UserFailureCardProps {
-  cause: Cause.Cause<GetUsersError>;
+  cause: Cause.Cause<GetUserError | GetUsersError>;
 }
 
-function getErrorTitle(error: GetUsersError): string {
+function getErrorTitle(error: GetUserError | GetUsersError): string {
   return Match.value(error).pipe(
+    Match.tag("GetUserRequestError", () => "Request Error"),
+    Match.tag("GetUserResponseError", () => "Response Error"),
+    Match.tag("GetUserParseError", () => "Parse Error"),
     Match.tag("GetUsersRequestError", () => "Request Error"),
     Match.tag("GetUsersResponseError", () => "Response Error"),
     Match.tag("GetUsersParseError", () => "Parse Error"),
@@ -36,7 +39,7 @@ export function UserFailureCard({ cause }: UserFailureCardProps) {
   );
 
   return (
-    <div className="flex items-center justify-center py-12 border">
+    <div className="flex items-center justify-center py-12 border mx-auto">
       <Empty>
         <EmptyHeader>
           <EmptyMedia variant="icon">

@@ -48,6 +48,7 @@ export function AddUserForm() {
       lastName: "",
       email: "",
       company: { name: "", title: "" },
+      address: { address: "", city: "", state: "" },
     },
   });
 
@@ -169,6 +170,50 @@ export function AddUserForm() {
                 id={`${id}-jobTitle-error`}
                 message={errors.company?.title?.message}
               />
+            </div>
+          </div>
+
+          {/* --- ✅ NEW: Address Info --- */}
+          <div className="space-y-4 pt-2">
+            <div className="space-y-2">
+              <Label htmlFor={`${id}-address`}>Street Address</Label>
+              <Input
+                id={`${id}-address`}
+                {...register("address.address")}
+                aria-invalid={!!errors.address?.address}
+              />
+              <FormFieldErrorMessage
+                id={`${id}-address-error`}
+                message={errors.address?.address?.message}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor={`${id}-city`}>City</Label>
+                <Input
+                  id={`${id}-city`}
+                  {...register("address.city")}
+                  aria-invalid={!!errors.address?.city}
+                />
+                <FormFieldErrorMessage
+                  id={`${id}-city-error`}
+                  message={errors.address?.city?.message}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor={`${id}-state`}>State</Label>
+                <Input
+                  id={`${id}-state`}
+                  {...register("address.state")}
+                  aria-invalid={!!errors.address?.state}
+                />
+                <FormFieldErrorMessage
+                  id={`${id}-state-error`}
+                  message={errors.address?.state?.message}
+                />
+              </div>
             </div>
           </div>
 

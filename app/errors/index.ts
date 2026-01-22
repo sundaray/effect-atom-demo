@@ -1,5 +1,30 @@
-import { Effect, Data } from "effect";
+import { Data } from "effect";
 
+// ============ GetUser Errors ============
+
+export class GetUserRequestError extends Data.TaggedError(
+  "GetUserRequestError",
+)<{
+  message: string;
+  cause: unknown;
+}> {}
+
+export class GetUserResponseError extends Data.TaggedError(
+  "GetUserResponseError",
+)<{
+  message: string;
+  cause: unknown;
+}> {}
+
+export class GetUserParseError extends Data.TaggedError("GetUserParseError")<{
+  message: string;
+  cause: unknown;
+}> {}
+
+export type GetUserError =
+  | GetUserRequestError
+  | GetUserResponseError
+  | GetUserParseError;
 // ============ GetUsers Errors ============
 
 export class GetUsersRequestError extends Data.TaggedError(
@@ -25,7 +50,6 @@ export type GetUsersError =
   | GetUsersRequestError
   | GetUsersResponseError
   | GetUsersParseError;
-
 // ============ DeleteUser Errors ============
 
 export class DeleteUserRequestError extends Data.TaggedError(
@@ -72,4 +96,8 @@ export type AddUserError =
 
 // ============ Combined Service Error ============
 
-export type UserServiceError = GetUsersError | DeleteUserError | AddUserError;
+export type UserServiceError =
+  | GetUserError
+  | GetUsersError
+  | DeleteUserError
+  | AddUserError;

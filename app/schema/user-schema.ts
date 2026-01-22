@@ -9,6 +9,11 @@ export const UserSchema = Schema.Struct({
     name: Schema.String,
     title: Schema.String,
   }),
+  address: Schema.Struct({
+    address: Schema.String,
+    city: Schema.String,
+    state: Schema.String,
+  }),
 });
 
 const requiredString = (message: string) =>
@@ -26,6 +31,12 @@ export const AddUserFormSchema = Schema.Struct({
   company: Schema.Struct({
     name: requiredString("Company name is required"),
     title: requiredString("Job title is required"),
+  }),
+
+  address: Schema.Struct({
+    address: requiredString("Street address is required"),
+    city: requiredString("City is required"),
+    state: requiredString("State is required"),
   }),
 });
 

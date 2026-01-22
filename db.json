@@ -8,6 +8,11 @@
       "company": {
         "name": "Spinka - Dickinson",
         "title": "Support Specialist"
+      },
+      "address": {
+        "address": "385 Fifth Street",
+        "city": "Houston",
+        "state": "Alabama"
       }
     },
     {
@@ -18,6 +23,11 @@
       "company": {
         "name": "Schiller - Zieme",
         "title": "Accountant"
+      },
+      "address": {
+        "address": "1642 Ninth Street",
+        "city": "Washington",
+        "state": "Alabama"
       }
     },
     {
@@ -28,6 +38,11 @@
       "company": {
         "name": "Pagac and Sons",
         "title": "Research Analyst"
+      },
+      "address": {
+        "address": "238 Jefferson Street",
+        "city": "Seattle",
+        "state": "Pennsylvania"
       }
     },
     {
@@ -38,6 +53,11 @@
       "company": {
         "name": "Graham - Gulgowski",
         "title": "Quality Assurance Engineer"
+      },
+      "address": {
+        "address": "607 Fourth Street",
+        "city": "Jacksonville",
+        "state": "Colorado"
       }
     },
     {
@@ -48,6 +68,11 @@
       "company": {
         "name": "Pfannerstill Inc",
         "title": "Research Analyst"
+      },
+      "address": {
+        "address": "547 First Street",
+        "city": "Fort Worth",
+        "state": "Tennessee"
       }
     },
     {
@@ -58,6 +83,11 @@
       "company": {
         "name": "Dickens - Beahan",
         "title": "Web Developer"
+      },
+      "address": {
+        "address": "664 Maple Street",
+        "city": "Indianapolis",
+        "state": "Delaware"
       }
     },
     {
@@ -68,6 +98,11 @@
       "company": {
         "name": "Nikolaus Inc",
         "title": "Chief Executive Officer"
+      },
+      "address": {
+        "address": "1197 First Street",
+        "city": "Fort Worth",
+        "state": "Rhode Island"
       }
     },
     {
@@ -78,6 +113,11 @@
       "company": {
         "name": "Gorczany - Gottlieb",
         "title": "Legal Counsel"
+      },
+      "address": {
+        "address": "466 Pine Street",
+        "city": "San Antonio",
+        "state": "Louisiana"
       }
     },
     {
@@ -88,6 +128,11 @@
       "company": {
         "name": "Pollich - Hilpert",
         "title": "Chief Financial Officer"
+      },
+      "address": {
+        "address": "1964 Oak Street",
+        "city": "New York",
+        "state": "Utah"
       }
     },
     {
@@ -98,6 +143,11 @@
       "company": {
         "name": "Considine - Torp",
         "title": "Web Developer"
+      },
+      "address": {
+        "address": "576 Fifth Street",
+        "city": "Denver",
+        "state": "South Dakota"
       }
     },
     {
@@ -108,6 +158,11 @@
       "company": {
         "name": "Miller, Schowalter and Wisozk",
         "title": "Business Analyst"
+      },
+      "address": {
+        "address": "1627 Sixth Street",
+        "city": "Jacksonville",
+        "state": "West Virginia"
       }
     }
   ]

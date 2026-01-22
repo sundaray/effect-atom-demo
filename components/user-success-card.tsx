@@ -36,7 +36,7 @@ export function UserSuccessCard({ user }: UserSuccessCardProps) {
       />
 
       {/* Middle Section: Secondary Info */}
-      <p className="text-xs text-neutral-400 break-all">{user.email}</p>
+      <p className="text-xs text-neutral-500 break-all">{user.email}</p>
 
       <Link
         href={`/users/${user.id}`}

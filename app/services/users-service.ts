@@ -14,7 +14,11 @@ import {
 } from "@/app/schema/user-schema";
 import {
   AddUserError,
+  GetUserError,
   GetUsersError,
+  GetUserRequestError,
+  GetUserParseError,
+  GetUserResponseError,
   GetUsersRequestError,
   GetUsersParseError,
   GetUsersResponseError,
@@ -33,6 +37,9 @@ export class UsersService extends Effect.Service<UsersService>()(
       const client = (yield* HttpClient.HttpClient).pipe(
         HttpClient.filterStatusOk,
       );
+
+      // ============ Get Users ============
+
       function getUsers(
         query: string,
         page: number,
@@ -84,6 +91,39 @@ export class UsersService extends Effect.Service<UsersService>()(
         );
       }
 
+      // ============ Get User ============
+
+      function getUser(id: string): Effect.Effect<User, GetUserError> {
+        return client.get(`http://localhost:3001/users/${id}`).pipe(
+          Effect.flatMap(HttpClientResponse.schemaBodyJson(UserSchema)),
+          Effect.catchTags({
+            RequestError: (err) =>
+              Effect.fail(
+                new GetUserRequestError({
+                  message: `Failed to get user ${id}`,
+                  cause: err,
+                }),
+              ),
+            ResponseError: (err) =>
+              Effect.fail(
+                new GetUserResponseError({
+                  message: `Failed to get user ${id}: status ${err.response.status}`,
+                  cause: err,
+                }),
+              ),
+            ParseError: (err) =>
+              Effect.fail(
+                new GetUserParseError({
+                  message: "Failed to parse getUser response",
+                  cause: err,
+                }),
+              ),
+          }),
+        );
+      }
+
+      // ============ Delete User ============
+
       function deleteUser(
         userId: string,
       ): Effect.Effect<void, DeleteUserError> {
@@ -107,6 +147,8 @@ export class UsersService extends Effect.Service<UsersService>()(
           }),
         );
       }
+
+      // ============ Add User ============
 
       function addUser(
         user: AddUserFormValues,
@@ -149,7 +191,7 @@ export class UsersService extends Effect.Service<UsersService>()(
         );
       }
 
-      return { getUsers, deleteUser, addUser };
+      return { getUser, getUsers, deleteUser, addUser };
     }),
     dependencies: [FetchHttpClient.layer],
     accessors: true,

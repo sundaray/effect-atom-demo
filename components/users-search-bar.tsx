@@ -32,7 +32,7 @@ export function UsersSearchBar() {
 
       <Input
         placeholder="Search by user name..."
-        className="pl-9 pr-8 h-10"
+        className="pl-9 pr-8"
         value={query}
         onChange={(event) => handleSearch(event.target.value)}
         onKeyDown={(e) => {
