@@ -1,9 +1,7 @@
 "use client";
 
-import { useAtomRefresh } from "@effect-atom/atom-react";
-import { usersAtom } from "@/app/atoms/users";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Exit, Cause, Option } from "effect";
 import { Button } from "@/components/ui/button";
@@ -28,8 +26,6 @@ interface UserDeleteDialogProps {
 }
 
 export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
-  const router = useRouter();
-
   const [open, setOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -57,8 +53,10 @@ export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
     setIsDeleting(false);
 
     if (Exit.isSuccess(exit)) {
-      router.refresh();
       setOpen(false);
+      toast.success("User deleted successfully", {
+        description: `${user.firstName} ${user.lastName} has been deleted.`,
+      });
     } else {
       const failureOption = Cause.failureOption(exit.cause);
       const errorMessage = Option.isSome(failureOption)
