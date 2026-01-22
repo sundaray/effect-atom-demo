@@ -1,6 +1,66 @@
 {
   "users": [
     {
+      "id": "1",
+      "firstName": "Emily",
+      "lastName": "Johnson",
+      "email": "emily.johnson@example.com",
+      "company": {
+        "name": "Dooley, Kozey and Cronin",
+        "title": "Sales Manager"
+      }
+    },
+    {
+      "id": "2",
+      "firstName": "Michael",
+      "lastName": "Williams",
+      "email": "michael.williams@example.com",
+      "company": {
+        "name": "Spinka - Dickinson",
+        "title": "Support Specialist"
+      }
+    },
+    {
+      "id": "3",
+      "firstName": "Sophia",
+      "lastName": "Brown",
+      "email": "sophia.brown@example.com",
+      "company": {
+        "name": "Schiller - Zieme",
+        "title": "Accountant"
+      }
+    },
+    {
+      "id": "4",
+      "firstName": "James",
+      "lastName": "Davis",
+      "email": "james.davis@example.com",
+      "company": {
+        "name": "Pagac and Sons",
+        "title": "Research Analyst"
+      }
+    },
+    {
+      "id": "5",
+      "firstName": "Emma",
+      "lastName": "Miller",
+      "email": "emma.miller@example.com",
+      "company": {
+        "name": "Graham - Gulgowski",
+        "title": "Quality Assurance Engineer"
+      }
+    },
+    {
+      "id": "6",
+      "firstName": "Olivia",
+      "lastName": "Wilson",
+      "email": "olivia.wilson@example.com",
+      "company": {
+        "name": "Pfannerstill Inc",
+        "title": "Research Analyst"
+      }
+    },
+    {
       "id": "7",
       "firstName": "Alexander",
       "lastName": "Jones",
