@@ -1,5 +1,5 @@
 import { Atom } from "@effect-atom/atom-react";
-import { Schema, Option } from "effect";
+import { Option, Schema } from "effect";
 
 export const pageQueryParamAtom = Atom.searchParam("page", {
   schema: Schema.NumberFromString,

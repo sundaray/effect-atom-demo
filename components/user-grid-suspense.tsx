@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 import { useAtomSuspense } from "@effect-atom/atom-react";
+
 import { usersAtom } from "@/app/atoms/users";
-import { UserSuccessCard } from "@/components/user-success-card";
+
 import { UserEmptyCard } from "@/components/user-empty-card";
 import { UserGridSpinner } from "@/components/user-grid-spinner";
+import { UserSuccessCard } from "@/components/user-success-card";
 
 function UsergridContent() {
   const result = useAtomSuspense(usersAtom);

@@ -1,8 +1,10 @@
 "use client";
 
 import { useAtomValue } from "@effect-atom/atom-react";
-import { searchQueryAtom } from "@/app/atoms/search";
 import { UsersIcon } from "lucide-react";
+
+import { searchQueryAtom } from "@/app/atoms/search";
+
 import {
   Empty,
   EmptyDescription,

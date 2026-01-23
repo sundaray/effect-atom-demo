@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "react-transition-progress/next";
+
 import { UserGrid } from "@/components/user-grid";
-import { UsersSearchBar } from "@/components/users-search-bar";
 import { UsersPagination } from "@/components/users-pagination";
+import { UsersSearchBar } from "@/components/users-search-bar";
 
 export default function Page() {
   return (

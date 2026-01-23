@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Link } from "react-transition-progress/next";
+
 import { Button } from "@/components/ui/button";
 import { UserDetail } from "@/components/user-detail";
 

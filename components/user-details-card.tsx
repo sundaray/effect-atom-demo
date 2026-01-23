@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+
 import type { User } from "@/app/schema/user-schema";
 
 interface UserDetailsCardProps {

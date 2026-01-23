@@ -1,10 +1,12 @@
-import { Effect, Data } from "effect";
 import { Atom } from "@effect-atom/atom-react";
-import { UsersService } from "@/app/services/users-service";
+import { Effect } from "effect";
+
 import { atomRuntime } from "@/runtime";
-import { AddUserFormValues } from "../schema/user-schema";
-import { debouncedSearchQueryAtom } from "@/app/atoms/search";
 import { pageAtom } from "@/app/atoms/page";
+import { debouncedSearchQueryAtom } from "@/app/atoms/search";
+import { UsersService } from "@/app/services/users-service";
+
+import { AddUserFormValues } from "../schema/user-schema";
 
 const usersResponseAtom = atomRuntime
   .atom((get) =>

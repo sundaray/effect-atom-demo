@@ -1,27 +1,29 @@
 "use client";
 
-import { useState, useId } from "react";
-import { useForm } from "react-hook-form";
-import { effectTsResolver } from "@hookform/resolvers/effect-ts";
+import { useId, useState } from "react";
 import { useAtomSet } from "@effect-atom/atom-react";
-import { Exit, Cause, Option } from "effect";
+import { effectTsResolver } from "@hookform/resolvers/effect-ts";
+import { Cause, Exit, Option } from "effect";
 import { Loader2 } from "lucide-react";
-import { useSpinDelay } from "@/hooks/use-spin-delay";
+import { useForm } from "react-hook-form";
 
 import {
   AddUserFormSchema,
   type AddUserFormValues,
 } from "@/app/schema/user-schema";
 import { addUserAtom } from "@/app/atoms/users";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
+
 import {
   FormErrorMessage,
   FormFieldErrorMessage,
   FormSuccessMessage,
 } from "@/components/form-messages";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+import { useSpinDelay } from "@/hooks/use-spin-delay";
 
 export function AddUserForm() {
   const id = useId();

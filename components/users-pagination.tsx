@@ -1,10 +1,13 @@
 "use client";
 
-import { useAtom, useAtomValue, Result } from "@effect-atom/atom-react";
+import { Result, useAtom, useAtomValue } from "@effect-atom/atom-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import { pageAtom } from "@/app/atoms/page";
 import { usersCountAtom } from "@/app/atoms/users";
+
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import { USERS_PER_PAGE } from "@/lib/constants";
 
 export function UsersPagination() {

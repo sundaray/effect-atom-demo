@@ -1,11 +1,13 @@
 "use client";
 
+import { Atom, useAtom } from "@effect-atom/atom-react";
 import { Search } from "lucide-react";
-import { useAtom, Atom } from "@effect-atom/atom-react";
-import { searchQueryAtom } from "@/app/atoms/search";
+
 import { pageAtom } from "@/app/atoms/page";
-import { Input } from "@/components/ui/input";
+import { searchQueryAtom } from "@/app/atoms/search";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export function UsersSearchBar() {
   const [query, setQuery] = useAtom(searchQueryAtom);

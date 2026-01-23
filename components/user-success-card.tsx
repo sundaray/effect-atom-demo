@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
 import type { User } from "@/app/schema/user-schema";
+
+import { Button } from "@/components/ui/button";
 import { UserDeleteDialog } from "@/components/user-delete-dialog";
 
 interface UserSuccessCardProps {

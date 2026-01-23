@@ -1,11 +1,13 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useAtomValue, Result } from "@effect-atom/atom-react";
+import { Result, useAtomValue } from "@effect-atom/atom-react";
+
 import { userAtom } from "@/app/atoms/user";
-import { UserGridSpinner } from "@/components/user-grid-spinner";
-import { UserFailureCard } from "@/components/user-failure-card";
+
 import { UserDetailsCard } from "@/components/user-details-card";
+import { UserFailureCard } from "@/components/user-failure-card";
+import { UserGridSpinner } from "@/components/user-grid-spinner";
 
 export function UserDetail() {
   const params = useParams<{ id: string }>();

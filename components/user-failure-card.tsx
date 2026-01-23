@@ -1,5 +1,8 @@
-import { Cause, Option, Match } from "effect";
+import { Cause, Match, Option } from "effect";
 import { AlertCircleIcon } from "lucide-react";
+
+import type { ConfigError, GetUserError, GetUsersError } from "@/app/errors";
+
 import {
   Empty,
   EmptyDescription,
@@ -7,7 +10,6 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import type { GetUserError, GetUsersError, ConfigError } from "@/app/errors";
 
 interface UserFailureCardProps {
   cause: Cause.Cause<GetUserError | GetUsersError | ConfigError>;

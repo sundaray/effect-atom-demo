@@ -1,9 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useAtomSet } from "@effect-atom/atom-react";
+import { Cause, Exit, Option } from "effect";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Loader2, AlertCircle } from "lucide-react";
-import { Exit, Cause, Option } from "effect";
+
+import type { User } from "@/app/schema/user-schema";
+import { deleteUserAtom } from "@/app/atoms/users";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,9 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useAtomSet } from "@effect-atom/atom-react";
-import { deleteUserAtom } from "@/app/atoms/users";
-import type { User } from "@/app/schema/user-schema";
+
 import { useSpinDelay } from "@/hooks/use-spin-delay";
 
 interface UserDeleteDialogProps {

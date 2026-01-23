@@ -1,38 +1,40 @@
-import { Effect } from "effect";
 import {
+  FetchHttpClient,
   HttpClient,
   HttpClientRequest,
   HttpClientResponse,
-  FetchHttpClient,
 } from "@effect/platform";
+import { Effect } from "effect";
+
 import {
-  UserSchema,
-  UsersSchema,
-  AddUserFormValues,
-  type User,
-  type UsersResponse,
-} from "@/app/schema/user-schema";
-import {
-  ConfigError,
+  AddUserBodySerializationError,
   AddUserError,
-  GetUserError,
-  GetUsersError,
-  GetUserRequestError,
-  GetUserParseError,
-  GetUserResponseError,
-  GetUsersRequestError,
-  GetUsersParseError,
-  GetUsersResponseError,
+  AddUserParseError,
+  AddUserRequestError,
+  AddUserResponseError,
+  ConfigError,
   DeleteUserError,
   DeleteUserRequestError,
   DeleteUserResponseError,
-  AddUserBodySerializationError,
-  AddUserRequestError,
-  AddUserResponseError,
-  AddUserParseError,
+  GetUserError,
+  GetUserParseError,
+  GetUserRequestError,
+  GetUserResponseError,
+  GetUsersError,
+  GetUsersParseError,
+  GetUsersRequestError,
+  GetUsersResponseError,
 } from "@/app/errors";
-import { USERS_PER_PAGE } from "@/lib/constants";
+import {
+  AddUserFormValues,
+  UserSchema,
+  UsersSchema,
+  type User,
+  type UsersResponse,
+} from "@/app/schema/user-schema";
+
 import { apiBaseUrlConfig } from "@/lib/config";
+import { USERS_PER_PAGE } from "@/lib/constants";
 
 export class UsersService extends Effect.Service<UsersService>()(
   "app/UsersService",
