@@ -31,7 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <main className="py-24">{children}</main>
+        </Providers>
         <Toaster position="top-right" />
       </body>
     </html>
