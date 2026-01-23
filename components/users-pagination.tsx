@@ -5,8 +5,7 @@ import { pageAtom } from "@/app/atoms/page";
 import { usersCountAtom } from "@/app/atoms/users";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const USERS_PER_PAGE = 8;
+import { USERS_PER_PAGE } from "@/lib/constants";
 
 export function UsersPagination() {
   const [page, setPage] = useAtom(pageAtom);
@@ -24,15 +23,16 @@ export function UsersPagination() {
 
       return (
         <div className="flex items-center justify-between py-4 border-t mt-4">
-          <div className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Page {page} of {totalPages}
-          </div>
+          </p>
           <div className="flex items-center space-x-2">
             <Button
               variant="secondary"
               size="sm"
               onClick={() => setPage(page - 1)}
               disabled={page <= 1}
+              className="hover:bg-neutral-200"
             >
               <ChevronLeft className="size-4" />
               Previous
@@ -42,6 +42,7 @@ export function UsersPagination() {
               size="sm"
               onClick={() => setPage(page + 1)}
               disabled={page >= totalPages}
+              className="hover:bg-neutral-200"
             >
               Next
               <ChevronRight className="size-4" />

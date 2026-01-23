@@ -12,7 +12,7 @@ export function UserSuccessCard({ user }: UserSuccessCardProps) {
   return (
     <div className="bg-white border p-4 flex flex-col justify-between gap-4 relative">
       <div className="space-y-1">
-        <h3 className="font-semibold text-lg leading-none">
+        <h3 className="font-semibold text-lg">
           {user.firstName} {user.lastName}
         </h3>
         <p className="text-sm text-neutral-600 font-medium">
@@ -35,7 +35,6 @@ export function UserSuccessCard({ user }: UserSuccessCardProps) {
         }
       />
 
-      {/* Middle Section: Secondary Info */}
       <p className="text-xs text-neutral-500 break-all">{user.email}</p>
 
       <Link

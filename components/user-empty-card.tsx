@@ -21,16 +21,14 @@ export function UserEmptyCard() {
     : "The users list is currently empty.";
 
   return (
-    <div className="flex items-center justify-center py-12 border">
-      <Empty>
-        <EmptyHeader>
-          <EmptyMedia variant="icon">
-            <UsersIcon className="text-neutral-400 size-10" />
-          </EmptyMedia>
-          <EmptyTitle className="font-bold text-lg">No Users Found</EmptyTitle>
-          <EmptyDescription className="text-sm">{description}</EmptyDescription>
-        </EmptyHeader>
-      </Empty>
-    </div>
+    <Empty className="border py-10">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <UsersIcon className="text-neutral-400 size-10" />
+        </EmptyMedia>
+        <EmptyTitle className="font-bold text-lg">No Users Found</EmptyTitle>
+        <EmptyDescription className="text-sm">{description}</EmptyDescription>
+      </EmptyHeader>
+    </Empty>
   );
 }

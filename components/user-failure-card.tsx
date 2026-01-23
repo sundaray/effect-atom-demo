@@ -7,14 +7,17 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import type { GetUserError, GetUsersError } from "@/app/errors";
+import type { GetUserError, GetUsersError, ConfigError } from "@/app/errors";
 
 interface UserFailureCardProps {
-  cause: Cause.Cause<GetUserError | GetUsersError>;
+  cause: Cause.Cause<GetUserError | GetUsersError | ConfigError>;
 }
 
-function getErrorTitle(error: GetUserError | GetUsersError): string {
+function getErrorTitle(
+  error: GetUserError | GetUsersError | ConfigError,
+): string {
   return Match.value(error).pipe(
+    Match.tag("ConfigError", () => "Config Error"),
     Match.tag("GetUserRequestError", () => "Request Error"),
     Match.tag("GetUserResponseError", () => "Response Error"),
     Match.tag("GetUserParseError", () => "Parse Error"),
@@ -39,20 +42,16 @@ export function UserFailureCard({ cause }: UserFailureCardProps) {
   );
 
   return (
-    <div className="flex items-center justify-center py-12 border mx-auto">
-      <Empty>
-        <EmptyHeader>
-          <EmptyMedia variant="icon">
-            <AlertCircleIcon className="text-red-600 size-10" />
-          </EmptyMedia>
-          <EmptyTitle className="text-red-600 text-lg font-bold">
-            {errorTitle}
-          </EmptyTitle>
-          <EmptyDescription className="text-sm">
-            {errorMessage}
-          </EmptyDescription>
-        </EmptyHeader>
-      </Empty>
-    </div>
+    <Empty className="border py-10">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <AlertCircleIcon className="text-red-600 size-10" />
+        </EmptyMedia>
+        <EmptyTitle className="text-red-600 text-lg font-bold">
+          {errorTitle}
+        </EmptyTitle>
+        <EmptyDescription className="text-sm">{errorMessage}</EmptyDescription>
+      </EmptyHeader>
+    </Empty>
   );
 }

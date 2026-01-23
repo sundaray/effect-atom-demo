@@ -5,10 +5,14 @@ import { UserDetail } from "@/components/user-detail";
 
 export default function UserDetailPage() {
   return (
-    <div className="min-h-screen bg-neutral-50">
-      <main className="p-6">
-        <UserDetail />
-      </main>
+    <div className="container max-w-5xl space-y-10">
+      <Button variant="ghost" asChild>
+        <Link href="/">
+          <ArrowLeft className="size-4" />
+          Back to users
+        </Link>
+      </Button>
+      <UserDetail />
     </div>
   );
 }

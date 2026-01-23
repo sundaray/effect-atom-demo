@@ -1,5 +1,12 @@
 import { Data } from "effect";
 
+// ============ Config Error ============
+
+export class ConfigError extends Data.TaggedError("ConfigError")<{
+  message: string;
+  cause: unknown;
+}> {}
+
 // ============ GetUser Errors ============
 
 export class GetUserRequestError extends Data.TaggedError(
@@ -70,6 +77,13 @@ export type DeleteUserError = DeleteUserRequestError | DeleteUserResponseError;
 
 // ============ AddUser Errors ============
 
+export class AddUserBodySerializationError extends Data.TaggedError(
+  "AddUserBodySerializationError",
+)<{
+  message: string;
+  cause: unknown;
+}> {}
+
 export class AddUserRequestError extends Data.TaggedError(
   "AddUserRequestError",
 )<{
@@ -90,13 +104,15 @@ export class AddUserParseError extends Data.TaggedError("AddUserParseError")<{
 }> {}
 
 export type AddUserError =
+  | AddUserBodySerializationError
   | AddUserRequestError
   | AddUserResponseError
   | AddUserParseError;
 
-// ============ Combined Service Error ============
+// ============ Combined Users Service Error ============
 
 export type UserServiceError =
+  | ConfigError
   | GetUserError
   | GetUsersError
   | DeleteUserError

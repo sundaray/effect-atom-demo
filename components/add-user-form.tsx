@@ -16,13 +16,7 @@ import { addUserAtom } from "@/app/atoms/users";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   FormErrorMessage,
   FormFieldErrorMessage,
@@ -30,7 +24,7 @@ import {
 } from "@/components/form-messages";
 
 export function AddUserForm() {
-  const id = useId(); // Generate a unique base ID for this form instance
+  const id = useId();
   const addUser = useAtomSet(addUserAtom, { mode: "promiseExit" });
 
   const [globalError, setGlobalError] = useState<string | null>(null);
@@ -63,7 +57,7 @@ export function AddUserForm() {
     const exit = await addUser(data);
     if (Exit.isSuccess(exit)) {
       setSuccessMessage("A new user has been added successfully.");
-      reset(); // Clear form inputs
+      reset();
     } else {
       const failureOption = Cause.failureOption(exit.cause);
       const errorMessage = Option.isSome(failureOption)
@@ -75,14 +69,7 @@ export function AddUserForm() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg font-bold">User Details</CardTitle>
-        <CardDescription className="text-sm">
-          Fill in the information below to create a new account.
-        </CardDescription>
-      </CardHeader>
       <CardContent className="mt-4">
-        {/* Global Feedback Messages */}
         <FormSuccessMessage message={successMessage} />
         <FormErrorMessage message={globalError} />
 
@@ -173,7 +160,7 @@ export function AddUserForm() {
             </div>
           </div>
 
-          {/* --- ✅ NEW: Address Info --- */}
+          {/* Address Info */}
           <div className="space-y-4 pt-2">
             <div className="space-y-2">
               <Label htmlFor={`${id}-address`}>Street Address</Label>
@@ -220,7 +207,7 @@ export function AddUserForm() {
           <div className="pt-4 flex justify-end">
             <Button type="submit" disabled={isSubmitting}>
               {showSpinner && <Loader2 className="size-4 animate-spin" />}
-              Create User
+              Add User
             </Button>
           </div>
         </form>

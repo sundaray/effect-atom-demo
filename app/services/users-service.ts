@@ -13,6 +13,7 @@ import {
   type UsersResponse,
 } from "@/app/schema/user-schema";
 import {
+  ConfigError,
   AddUserError,
   GetUserError,
   GetUsersError,
@@ -25,10 +26,13 @@ import {
   DeleteUserError,
   DeleteUserRequestError,
   DeleteUserResponseError,
+  AddUserBodySerializationError,
   AddUserRequestError,
   AddUserResponseError,
   AddUserParseError,
 } from "@/app/errors";
+import { USERS_PER_PAGE } from "@/lib/constants";
+import { apiBaseUrlConfig } from "@/lib/config";
 
 export class UsersService extends Effect.Service<UsersService>()(
   "app/UsersService",
@@ -38,19 +42,28 @@ export class UsersService extends Effect.Service<UsersService>()(
         HttpClient.filterStatusOk,
       );
 
+      const apiBaseUrl = yield* apiBaseUrlConfig.pipe(
+        Effect.catchTag("ConfigError", (error) =>
+          Effect.fail(
+            new ConfigError({
+              message: "Failed to load API configuration",
+              cause: error,
+            }),
+          ),
+        ),
+      );
+
       // ============ Get Users ============
 
       function getUsers(
         query: string,
         page: number,
       ): Effect.Effect<UsersResponse, GetUsersError> {
-        const request = HttpClientRequest.get(
-          "http://localhost:3001/users",
-        ).pipe(
+        const request = HttpClientRequest.get(`${apiBaseUrl}/users`).pipe(
           HttpClientRequest.setUrlParams({
-            q: query ?? "",
+            q: query,
             _page: page.toString(),
-            _limit: "8",
+            _limit: USERS_PER_PAGE.toString(),
           }),
         );
 
@@ -74,8 +87,7 @@ export class UsersService extends Effect.Service<UsersService>()(
             ResponseError: (responseError) =>
               Effect.fail(
                 new GetUsersResponseError({
-                  message:
-                    "Failed to get users: status ${responseError.response.status}",
+                  message: `Failed to get users: status ${responseError.response.status}`,
                   cause: responseError,
                 }),
               ),
@@ -94,7 +106,7 @@ export class UsersService extends Effect.Service<UsersService>()(
       // ============ Get User ============
 
       function getUser(id: string): Effect.Effect<User, GetUserError> {
-        return client.get(`http://localhost:3001/users/${id}`).pipe(
+        return client.get(`${apiBaseUrl}/users/${id}`).pipe(
           Effect.flatMap(HttpClientResponse.schemaBodyJson(UserSchema)),
           Effect.catchTags({
             RequestError: (err) =>
@@ -127,7 +139,7 @@ export class UsersService extends Effect.Service<UsersService>()(
       function deleteUser(
         userId: string,
       ): Effect.Effect<void, DeleteUserError> {
-        return client.del(`http://localhost:3001/users/${userId}`).pipe(
+        return client.del(`${apiBaseUrl}/users/${userId}`).pipe(
           Effect.asVoid,
           Effect.catchTags({
             RequestError: (requestError) =>
@@ -153,15 +165,14 @@ export class UsersService extends Effect.Service<UsersService>()(
       function addUser(
         user: AddUserFormValues,
       ): Effect.Effect<User, AddUserError> {
-        return HttpClientRequest.post("http://localhost:3001/users").pipe(
+        return HttpClientRequest.post(`${apiBaseUrl}//users`).pipe(
           HttpClientRequest.bodyJson(user),
           Effect.flatMap(client.execute),
           Effect.flatMap(HttpClientResponse.schemaBodyJson(UserSchema)),
           Effect.catchTags({
             HttpBodyError: (err) =>
               Effect.fail(
-                // Change the error name
-                new AddUserRequestError({
+                new AddUserBodySerializationError({
                   message: "Failed to serialize addUser request body",
                   cause: err,
                 }),

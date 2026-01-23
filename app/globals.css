@@ -4,6 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+  .container {
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -122,6 +129,10 @@
   }
   body {
     @apply bg-neutral-50 text-foreground;
+  }
+
+  h1 {
+    @apply text-2xl font-bold text-foreground tracking-tight;
   }
 
   button:not(:disabled),
