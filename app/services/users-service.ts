@@ -167,7 +167,7 @@ export class UsersService extends Effect.Service<UsersService>()(
       function addUser(
         user: AddUserFormValues,
       ): Effect.Effect<User, AddUserError> {
-        return HttpClientRequest.post(`${apiBaseUrl}//users`).pipe(
+        return HttpClientRequest.post(`${apiBaseUrl}/users`).pipe(
           HttpClientRequest.bodyJson(user),
           Effect.flatMap(client.execute),
           Effect.flatMap(HttpClientResponse.schemaBodyJson(UserSchema)),

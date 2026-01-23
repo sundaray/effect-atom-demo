@@ -1,10 +1,13 @@
 "use client";
 
-import { useId, useState } from "react";
+import { startTransition, useId, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAtomSet } from "@effect-atom/atom-react";
 import { effectTsResolver } from "@hookform/resolvers/effect-ts";
 import { Cause, Exit, Option } from "effect";
 import { useForm } from "react-hook-form";
+import { useProgress } from "react-transition-progress";
+import { toast } from "sonner";
 
 import {
   AddUserFormSchema,
@@ -15,7 +18,6 @@ import { addUserAtom } from "@/app/atoms/users";
 import {
   FormErrorMessage,
   FormFieldErrorMessage,
-  FormSuccessMessage,
 } from "@/components/form-messages";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
@@ -27,15 +29,15 @@ import { useSpinDelay } from "@/hooks/use-spin-delay";
 
 export function AddUserForm() {
   const id = useId();
+  const router = useRouter();
+  const startProgress = useProgress();
   const addUser = useAtomSet(addUserAtom, { mode: "promiseExit" });
 
   const [globalError, setGlobalError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm<AddUserFormValues>({
     resolver: effectTsResolver(AddUserFormSchema),
@@ -55,11 +57,20 @@ export function AddUserForm() {
 
   const onSubmit = async (data: AddUserFormValues) => {
     setGlobalError(null);
-    setSuccessMessage(null);
     const exit = await addUser(data);
+
     if (Exit.isSuccess(exit)) {
-      setSuccessMessage("A new user has been added successfully.");
-      reset();
+      const user = exit.value;
+
+      toast.success("User Added Successfully", {
+        description: `${user.firstName} ${user.lastName} was added successfully.`,
+      });
+
+      // Trigger the progress bar and redirect
+      startTransition(() => {
+        startProgress();
+        router.push("/");
+      });
     } else {
       const failureOption = Cause.failureOption(exit.cause);
       const errorMessage = Option.isSome(failureOption)
@@ -72,7 +83,6 @@ export function AddUserForm() {
   return (
     <Card>
       <CardContent className="mt-4">
-        <FormSuccessMessage message={successMessage} />
         <FormErrorMessage message={globalError} />
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
