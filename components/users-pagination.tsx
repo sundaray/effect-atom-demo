@@ -1,11 +1,11 @@
 "use client";
 
 import { Result, useAtom, useAtomValue } from "@effect-atom/atom-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { pageAtom } from "@/app/atoms/page";
 import { usersCountAtom } from "@/app/atoms/users";
 
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 import { USERS_PER_PAGE } from "@/lib/constants";
@@ -37,7 +37,7 @@ export function UsersPagination() {
               disabled={page <= 1}
               className="hover:bg-neutral-200"
             >
-              <ChevronLeft className="size-4" />
+              <Icons.chevronLeft className="size-4" />
               Previous
             </Button>
             <Button
@@ -48,7 +48,7 @@ export function UsersPagination() {
               className="hover:bg-neutral-200"
             >
               Next
-              <ChevronRight className="size-4" />
+              <Icons.chevronRight className="size-4" />
             </Button>
           </div>
         </div>

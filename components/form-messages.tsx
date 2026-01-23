@@ -1,4 +1,4 @@
-import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface FormErrorMessageProps {
   message?: string | null;
@@ -12,7 +12,7 @@ export function FormErrorMessage({ message }: FormErrorMessageProps) {
       role="alert"
       className="bg-red-50 text-red-900 border border-red-200 p-4 flex items-center gap-3 mb-6"
     >
-      <AlertCircle className="size-5 shrink-0 text-red-600" />
+      <Icons.alert className="size-5 shrink-0 text-red-600" />
       <p className="text-xs">{message}</p>
     </div>
   );
@@ -30,7 +30,7 @@ export function FormSuccessMessage({ message }: FormSuccessMessageProps) {
       role="alert"
       className="bg-green-50 text-green-900 border border-green-200 p-4 flex items-center gap-3 mb-6"
     >
-      <CheckCircle2 className="size-5 shrink-0 text-green-600" />
+      <Icons.checkCircle className="size-5 shrink-0 text-green-600" />
       <p className="text-sm font-medium">{message}</p>
     </div>
   );

@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { useAtomSet } from "@effect-atom/atom-react";
 import { Cause, Exit, Option } from "effect";
-import { AlertCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import type { User } from "@/app/schema/user-schema";
 import { deleteUserAtom } from "@/app/atoms/users";
 
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -84,7 +84,7 @@ export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
 
         {error && (
           <div className="flex items-center gap-2 p-3 text-sm text-red-600 bg-red-50 border border-red-200">
-            <AlertCircle className="size-4 shrink-0" />
+            <Icons.alert className="size-4 shrink-0" />
             <span>{error}</span>
           </div>
         )}
@@ -100,7 +100,7 @@ export function UserDeleteDialog({ user, trigger }: UserDeleteDialogProps) {
             onClick={handleDelete}
             disabled={isDeleting}
           >
-            {showSpinner && <Loader2 className="size-4 animate-spin" />}
+            {showSpinner && <Icons.spinner className="size-4 animate-spin" />}
             Delete
           </Button>
         </DialogFooter>

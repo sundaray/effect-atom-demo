@@ -1,8 +1,8 @@
 import { Cause, Match, Option } from "effect";
-import { AlertCircleIcon } from "lucide-react";
 
 import type { ConfigError, GetUserError, GetUsersError } from "@/app/errors";
 
+import { Icons } from "@/components/icons";
 import {
   Empty,
   EmptyDescription,
@@ -47,7 +47,7 @@ export function UserFailureCard({ cause }: UserFailureCardProps) {
     <Empty className="border py-10">
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <AlertCircleIcon className="text-red-600 size-10" />
+          <Icons.alert className="text-red-600 size-10" />
         </EmptyMedia>
         <EmptyTitle className="text-red-600 text-lg font-bold">
           {errorTitle}

@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
 import { Link } from "react-transition-progress/next";
 
 import { AddUserForm } from "@/components/add-user-form";
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 
 export default function AddUserPage() {
@@ -11,7 +11,7 @@ export default function AddUserPage() {
     <div className="container max-w-5xl space-y-10">
       <Button variant="ghost" asChild>
         <Link href="/">
-          <ArrowLeft className="size-4" />
+          <Icons.arrowLeft className="size-4" />
           Back to users
         </Link>
       </Button>

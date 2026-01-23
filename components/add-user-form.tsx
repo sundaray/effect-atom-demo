@@ -4,7 +4,6 @@ import { useId, useState } from "react";
 import { useAtomSet } from "@effect-atom/atom-react";
 import { effectTsResolver } from "@hookform/resolvers/effect-ts";
 import { Cause, Exit, Option } from "effect";
-import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -18,6 +17,7 @@ import {
   FormFieldErrorMessage,
   FormSuccessMessage,
 } from "@/components/form-messages";
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -208,7 +208,7 @@ export function AddUserForm() {
 
           <div className="pt-4 flex justify-end">
             <Button type="submit" disabled={isSubmitting}>
-              {showSpinner && <Loader2 className="size-4 animate-spin" />}
+              {showSpinner && <Icons.spinner className="size-4 animate-spin" />}
               Add User
             </Button>
           </div>

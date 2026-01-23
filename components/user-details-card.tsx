@@ -1,6 +1,6 @@
-import { MapPin } from "lucide-react";
-
 import type { User } from "@/app/schema/user-schema";
+
+import { Icons } from "@/components/icons";
 
 interface UserDetailsCardProps {
   user: User;
@@ -22,7 +22,7 @@ export function UserDetailsCard({ user }: UserDetailsCardProps) {
       <p className="text-sm text-neutral-500 break-all">{user.email}</p>
 
       <div className="flex items-start gap-3 bg-neutral-50 p-3 border">
-        <MapPin className="size-5 text-neutral-400 mt-0.5 shrink-0" />
+        <Icons.mapPin className="size-5 text-neutral-400 mt-0.5 shrink-0" />
         <div className="text-sm text-neutral-600">
           <p>{user.address.address}</p>
           <p>

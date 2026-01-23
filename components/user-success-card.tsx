@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Trash2 } from "lucide-react";
 
 import type { User } from "@/app/schema/user-schema";
 
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { UserDeleteDialog } from "@/components/user-delete-dialog";
 
@@ -31,7 +31,7 @@ export function UserSuccessCard({ user }: UserSuccessCardProps) {
             size="icon"
             className="size-8 text-neutral-400 hover:text-red-600 hover:bg-red-50 absolute top-1 right-1"
           >
-            <Trash2 className="size-4" />
+            <Icons.trash className="size-4" />
             <span className="sr-only">Delete user</span>
           </Button>
         }
